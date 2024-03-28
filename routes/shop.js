@@ -3,19 +3,15 @@ const path = require("path");
 const express = require("express");
 
 const rootDir = require("../util/path");
-const adminData = require("./admin");
+// const adminData = require("./admin");
+const controllers = require("../Controllers/shopControllers");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  console.log("in shop js", adminData.products);
-  console.log("12 ================> ", adminData.products);
-  res.render("shop", {
-    prods: adminData.products,
-    pageTitle: "shop",
-    path: "/",
-  });
-  // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
-});
+router.get("/", controllers.getIndex);
+router.get("/products", controllers.getProductsFromAdd);
+router.get("/cart", controllers.getCart);
+router.get("/checkout", controllers.getCheckout);
+router.get("/orders", controllers.getOrders);
 
 module.exports = router;
